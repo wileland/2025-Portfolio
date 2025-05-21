@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-const App = () => {
-  return <div>Hello World</div>;
-=======
 import Test from "./Test";
 import "./app.scss";
 import Contact from "./components/contact/Contact";
@@ -38,7 +34,6 @@ const App = () => {
     <Test/> */}
     </div>
   );
->>>>>>> db74942 (“commit”)
 };
 
 export default App;
