@@ -11,11 +11,12 @@
   },
   "dependencies": {
     "@emailjs/browser": "^3.11.0",
-    "@react-three/drei": "^10.0.8",
-    "@react-three/fiber": "^9.1.2",
+    "@react-three/drei": "^9.56.11",
+    "@react-three/fiber": "^8.13.6",
     "framer-motion": "^10.16.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-router-dom": "^7.6.0",
     "sass": "^1.68.0",
     "three": "^0.176.0"
   },
