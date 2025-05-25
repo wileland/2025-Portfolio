@@ -11,6 +11,8 @@
     text-align: center;
     color: orange;
     font-size: 36px;
+    z-index: 10;
+    background-color: #0c0c1d; // Ensures readability over scroll content
 
     @include mobile {
       padding-top: calc(100vh - 100px);
@@ -20,6 +22,7 @@
     .progressBar {
       height: 10px;
       background-color: white;
+      transform-origin: left;
     }
   }
 
@@ -42,6 +45,7 @@
 
       @include mobile {
         flex-direction: column;
+        padding: 20px;
       }
 
       .imageContainer {
@@ -88,6 +92,7 @@
         p {
           color: gray;
           font-size: 20px;
+          line-height: 1.6;
 
           @include mobile {
             font-size: 16px;
@@ -101,6 +106,11 @@
           padding: 10px;
           width: 200px;
           cursor: pointer;
+          transition: background-color 0.3s;
+
+          &:hover {
+            background-color: darkorange;
+          }
         }
       }
     }

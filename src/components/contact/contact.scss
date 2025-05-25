@@ -46,13 +46,13 @@
     position: relative;
 
     @include mobile {
-      padding: 50px;
       width: 100%;
+      padding: 50px;
     }
 
     .phoneSvg {
-      stroke: orange;
       position: absolute;
+      stroke: orange;
       margin: auto;
       z-index: -1;
     }

@@ -23,6 +23,7 @@ const textVariants = {
     },
   },
 };
+
 const sliderVariants = {
   initial: {
     x: 0,
@@ -31,7 +32,7 @@ const sliderVariants = {
     x: "-220%",
     transition: {
       repeat: Infinity,
-      repeatType:"mirror",
+      repeatType: "mirror",
       duration: 20,
     },
   },
@@ -47,24 +48,25 @@ const Hero = () => {
           initial="initial"
           animate="animate"
         >
-          <motion.h2 variants={textVariants}>William Haynes</motion.h2>
+          <motion.h2 variants={textVariants}>William L. Haynes</motion.h2>
           <motion.h1 variants={textVariants}>
-          MERN Stack Developer | AI Explorer | Storybuilder
+            MERN Stack Developer | AI Explorer | Storybuilder
           </motion.h1>
-          <motion.div variants={textVariants} className="buttons">
+          <motion.div className="buttons" variants={textVariants}>
             <motion.button variants={textVariants}>
               See the Latest Works
             </motion.button>
             <motion.button variants={textVariants}>Contact Me</motion.button>
           </motion.div>
           <motion.img
+            src="/scroll.png"
+            alt="Scroll Indicator"
             variants={textVariants}
             animate="scrollButton"
-            src="/scroll.png"
-            alt=""
           />
         </motion.div>
       </div>
+
       <motion.div
         className="slidingTextContainer"
         variants={sliderVariants}
@@ -73,8 +75,9 @@ const Hero = () => {
       >
         Writer Content Creator Influencer
       </motion.div>
+
       <div className="imageContainer">
-        <img src="/hero.png" alt="" />
+        <img src="/hero.png" alt="Hero illustration" />
       </div>
     </div>
   );

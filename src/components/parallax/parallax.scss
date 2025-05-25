@@ -1,13 +1,11 @@
-@use "../../app.scss" as *; // Ensures mobile mixin is available
+@use "../../app.scss" as *;
 
-// 1. Define the animatable custom property for the angle
 @property --angle {
   syntax: "<angle>";
   inherits: false;
   initial-value: 0deg;
 }
 
-// 2. Define the keyframes for the border spinning animation
 @keyframes spinBorder {
   0% {
     --angle: 0deg;
@@ -17,7 +15,6 @@
   }
 }
 
-// 3. Styles for the main parallax container and its children
 .parallax {
   width: 100%;
   height: 100%;

@@ -1,6 +1,8 @@
+// File: /src/App.jsx
+
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import GameRoute from './pages/GameRoute'; // Make sure this path is correct
-import IntroCrawlPage from './components/IntroCrawlPage/IntroCrawlPage'; // Added import - adjust path if needed
+import GameRoute from './pages/GameRoute';
+import IntroCrawlPage from './components/IntroCrawlPage/IntroCrawlPage';
 
 import Test from "./Test";
 import "./app.scss";
@@ -15,42 +17,45 @@ import Services from "./components/services/Services";
 const App = () => {
   return (
     <Router>
-      <Cursor /> {/* Cursor can be here if it's global and doesn't interfere with routing */}
+      <Cursor />
+
       <Routes>
         <Route
           path="/"
           element={
-            <> {/* Using a fragment to group existing sections for the root path */}
+            <>
               <section id="Homepage">
                 <Navbar />
                 <Hero />
               </section>
 
-              {/* Add the IntroCrawlPage component here */}
               <IntroCrawlPage />
 
               <section id="Services">
-                {/* This Parallax will now primarily show "The Catalyst." with rocks */}
                 <Parallax type="services" />
               </section>
+
               <section>
                 <Services />
               </section>
+
               <section id="Portfolio">
                 <Parallax type="portfolio" />
               </section>
-              <Portfolio /> {/* Assuming this is a component and not a section tag based on naming */}
+
+              <Portfolio />
+
               <section id="Contact">
                 <Contact />
               </section>
-              {/* Framer Motion Crash Course */}
-              {/* <Test/>
-              <Test/> */}
+
+              {/* Optional: Framer Motion crash course testing */}
+              {/* <Test /> */}
             </>
           }
         />
+
         <Route path="/game" element={<GameRoute />} />
-        {/* You can add other routes here later */}
       </Routes>
     </Router>
   );
