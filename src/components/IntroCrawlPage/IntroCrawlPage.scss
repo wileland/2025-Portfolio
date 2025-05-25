@@ -1,0 +1,149 @@
+// src/components/IntroCrawlPage/introCrawlPage.scss
+
+@keyframes starWarsCrawlAnimation {
+  0% {
+    // Starts completely below the window's bottom edge for a smooth loop
+    transform: translateX(-50%) rotateX(60deg) translateY(100%)
+      translateZ(-300px);
+    opacity: 1;
+  }
+  95% {
+    opacity: 1; // Keep text visible for most of its scroll
+  }
+  100% {
+    // Scrolls until it's well above the top of the "scroll-text-window"
+    transform: translateX(-50%) rotateX(60deg) translateY(-140%)
+      translateZ(-300px); // Increased negative Y for longer text
+    opacity: 0;
+  }
+}
+
+.intro-crawl-section {
+  height: 100vh;
+  width: 100vw;
+  background-color: #0c0c1d; // Fallback or base color
+  background-image: linear-gradient(180deg, #111132, #0c0c1d); // Base gradient
+  background-size: cover;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  scroll-snap-align: center; // If using scroll snapping
+
+  &::before {
+    // Stars layer
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("/stars.png"); // Ensure this path is correct
+    background-size: cover;
+    background-position: center center; // Centered stars
+    opacity: 0.6; // Slightly more subtle stars
+    z-index: 1; // Behind the scroll window
+  }
+
+  .scroll-text-window {
+    width: 90vw; // Kept wide
+    height: 75vh; // Slightly taller window for more visible text
+    max-width: 1600px; // Wider max-width
+    position: relative;
+    overflow: hidden;
+    perspective: 450px; // Adjusted perspective for balance
+    perspective-origin: 50% 70%; // Vanishing point (X Y)
+    border-radius: 8px; // Softer rounded corners
+    // background-color: rgba(10, 10, 20, 0.2); // Optional very subtle window tint for depth
+    z-index: 2;
+
+    .crawl-fade-overlay {
+      // Fades text at the top of the window
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 20%; // Fade takes up 20% of the window height
+      background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.95) 0%,
+        rgba(0, 0, 0, 0) 100%
+      );
+      z-index: 10;
+    }
+
+    .crawl-text {
+      position: absolute;
+      left: 50%;
+      // bottom: 0; // Origin is effectively set by transform-origin and initial translateY
+      width: 95%; // Use most of the scroll-text-window width
+
+      text-align: justify;
+      color: #e1ca70; // Slightly adjusted yellow for warmth/readability
+      font-family: "Arial", "Helvetica Neue", Helvetica, sans-serif; // Consider a more thematic font if available
+      font-weight: bold;
+
+      // --- Adjusted Font Size for Cohesion ---
+      font-size: 5.2rem; // Still very large, but balanced for width
+      line-height: 1.55; // Adjusted for new font size
+
+      transform-origin: 50% 100%;
+
+      animation-name: starWarsCrawlAnimation;
+      animation-duration: 68s; // Desktop speed (1.25x faster than 85s)
+      animation-timing-function: linear;
+      animation-iteration-count: infinite; // Loops continuously
+      opacity: 0; // Animation handles opacity
+      will-change: transform, opacity;
+
+      p {
+        margin-bottom: 1.3em; // Adjusted for font size
+      }
+
+      @media (max-width: 1024px) {
+        // Large tablets / Small desktops
+        font-size: 4.6rem;
+        animation-duration: 72s;
+      }
+
+      @media (max-width: 768px) {
+        // Tablets
+        font-size: 4rem;
+        width: 92%;
+        line-height: 1.6;
+        animation-duration: 76s;
+      }
+
+      @media (max-width: 480px) {
+        // Mobile phones
+        font-size: 3.2rem;
+        width: 95%;
+        line-height: 1.6;
+        animation-duration: 80s;
+        // Perspective on .scroll-text-window can be adjusted here if needed:
+        // e.g. .scroll-text-window { @media (max-width: 480px) { perspective: 300px; } }
+      }
+    }
+  }
+}
+
+// Accessibility: Pause animation if user prefers reduced motion
+@media (prefers-reduced-motion: reduce) {
+  .intro-crawl-section .crawl-text {
+    animation-name: none; // Stop the scroll
+    // Position it statically if animation is off, or ensure it's readable
+    // For a static display, you might want to remove the 3D transforms entirely
+    // and just let it be a scrollable text box within the window.
+    // This is a simple pause; a full static fallback might need more style overrides.
+    transform: translateX(-50%) rotateX(0deg) translateY(0) translateZ(0); // Reset transform
+    opacity: 1;
+    position: relative; // Allow normal scrolling within its parent
+    overflow-y: auto; // Allow user to scroll the text manually
+    height: 100%; // Fill the scroll-text-window
+    text-align: left; // Justify might be hard to read without scroll
+    font-size: 1.5rem; // More standard reading size for static text
+    padding: 20px; // Some padding
+    box-sizing: border-box;
+  }
+}

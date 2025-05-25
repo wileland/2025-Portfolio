@@ -1,16 +1,51 @@
-@import "../../app.scss";
+@use "../../app.scss" as *; // Ensures mobile mixin is available
 
+// 1. Define the animatable custom property for the angle
+@property --angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+// 2. Define the keyframes for the border spinning animation
+@keyframes spinBorder {
+  0% {
+    --angle: 0deg;
+  }
+  100% {
+    --angle: 360deg;
+  }
+}
+
+// 3. Styles for the main parallax container and its children
 .parallax {
   width: 100%;
   height: 100%;
   position: relative;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   overflow: hidden;
 
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(17, 17, 50, 0.9),
+      rgba(12, 12, 29, 0.98)
+    );
+    z-index: 2;
+  }
+
   h1 {
     font-size: 100px;
+    position: relative;
+    z-index: 5;
+    color: #fff;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 
     @include mobile {
       font-size: 72px;
@@ -18,8 +53,72 @@
     }
   }
 
+  .about-text {
+    position: relative;
+    z-index: 5;
+  }
+
+  .catalyst-text-animated {
+    --text-border-thickness: 4px;
+    --text-border-radius: 8px;
+    --text-animation-duration: 3s;
+    --text-glow-blur: 12px;
+    --text-glow-opacity: 0.75;
+
+    --color1: #00c6ff;
+    --color2: #ff00ff;
+    --color3: #ffc800;
+    --color4: #00ff00;
+    --color5: var(--color1);
+
+    display: inline-block;
+    position: relative;
+    padding: var(--text-border-thickness);
+    border-radius: var(--text-border-radius);
+    color: #fff;
+    background-color: transparent;
+
+    animation: spinBorder var(--text-animation-duration) linear infinite;
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      border-radius: inherit;
+      background: conic-gradient(
+        from var(--angle) at 50% 50%,
+        var(--color1),
+        var(--color2),
+        var(--color3),
+        var(--color4),
+        var(--color5)
+      );
+    }
+
+    &::before {
+      filter: blur(var(--text-glow-blur));
+      opacity: var(--text-glow-opacity);
+    }
+  }
+
   .mountains {
     background-image: url("/mountains.png");
+    background-size: cover;
+    background-position: bottom;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 4;
+
+    @include mobile {
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+  }
+
+  .planets {
     background-size: cover;
     background-position: bottom;
     width: 100%;
@@ -32,18 +131,7 @@
       background-repeat: no-repeat;
     }
   }
-  .planets {
-    background-size: cover;
-    background-position: bottom;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    z-index: 2;
-    @include mobile {
-      background-size: contain;
-      background-repeat: no-repeat;
-    }
-  }
+
   .stars {
     background-image: url("/stars.png");
     background-size: cover;

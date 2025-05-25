@@ -1,3 +1,7 @@
+/* -----------------------------------------------
+   Global Styles
+-------------------------------------------------- */
+
 html {
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
@@ -27,16 +31,22 @@ section {
   overflow: hidden;
 }
 
+/* -----------------------------------------------
+   Responsive Mixins
+-------------------------------------------------- */
+
 @mixin mobile {
   @media (max-width: 738px) {
     @content;
   }
 }
+
 @mixin tablet {
   @media (max-width: 1024px) {
     @content;
   }
 }
+
 @mixin desktop {
   @media (max-width: 1366px) {
     @content;

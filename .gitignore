@@ -7,18 +7,47 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
+# Runtime
+node_modules/
+dist/
+build/
+dist-ssr/
+.vite/
+.temp/
+.cache/
 *.local
 
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
+# System files
 .DS_Store
+Thumbs.db
+*.swp
+
+# Environment & config
+.env
+.env.*.local
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Vite HMR / telemetry
+.vitepress/
+.vite-inspect/
+
+# IDE/editor settings
+.vscode/
+!.vscode/extensions.json
+.idea/
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
-*.sw?
+
+# Mac/Unix junk
+*.orig
+*.bak
+
+# Dependency trees
+package-lock.json
+yarn.lock
+pnpm-lock.yaml

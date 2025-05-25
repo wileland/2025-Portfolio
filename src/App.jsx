@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import GameRoute from './pages/GameRoute'; // Make sure this path is correct
+import IntroCrawlPage from './components/IntroCrawlPage/IntroCrawlPage'; // Added import - adjust path if needed
 
 import Test from "./Test";
 import "./app.scss";
@@ -24,7 +25,12 @@ const App = () => {
                 <Navbar />
                 <Hero />
               </section>
+
+              {/* Add the IntroCrawlPage component here */}
+              <IntroCrawlPage />
+
               <section id="Services">
+                {/* This Parallax will now primarily show "The Catalyst." with rocks */}
                 <Parallax type="services" />
               </section>
               <section>

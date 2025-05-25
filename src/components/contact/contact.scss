@@ -1,4 +1,4 @@
-@import "../../app.scss";
+@use "../../app.scss" as *;
 
 .contact {
   height: 100%;
@@ -44,12 +44,11 @@
   .formContainer {
     flex: 1;
     position: relative;
-    
+
     @include mobile {
       padding: 50px;
       width: 100%;
     }
-
 
     .phoneSvg {
       stroke: orange;
@@ -82,6 +81,7 @@
         background-color: orange;
         cursor: pointer;
         font-weight: 500;
+
         @include mobile {
           padding: 10px;
         }
