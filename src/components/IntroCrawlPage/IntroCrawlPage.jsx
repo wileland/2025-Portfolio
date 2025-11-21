@@ -1,7 +1,7 @@
 // File: /src/components/IntroCrawlPage/IntroCrawlPage.jsx
 
 import { useEffect, useRef, useState } from "react";
-import "./introCrawlPage.scss";
+import "./IntroCrawlPage.scss";
 
 const crawlParagraphs = [
   "My entire life has been woven together with technology. From CISCO networking in high school to managing university lab systems, from teaching in Title I schools to building MERN apps with AI integration, tech has always been my throughline—and my refuge.",
