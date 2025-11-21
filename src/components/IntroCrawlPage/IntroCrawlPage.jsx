@@ -72,9 +72,9 @@ const IntroCrawlPage = () => {
 
       <div className={`reflection-overlay ${revealText ? "visible" : ""}`}>
         <p>
-          This journey is more than a scroll—it's a transmission. A record of how tech,
-          creativity, and resilience converge to tell a story worth building on. If you're here,
-          you're already part of it.
+          This journey is more than a scroll it is a transmission. A record of how tech,
+          creativity, and resilience converge to tell a story worth building on. If you are here,
+          you are already part of it.
         </p>
         <div className="controls">
           {!revealText && (
