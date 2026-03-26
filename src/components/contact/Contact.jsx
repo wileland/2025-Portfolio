@@ -1,5 +1,3 @@
-// File Location: src/components/contact/Contact.jsx
-
 import { useRef, useState } from "react";
 import "./contact.scss";
 import { motion, useInView } from "framer-motion";
@@ -40,7 +38,7 @@ const Contact = () => {
         "service_94y20xo",
         "template_v10u2oh",
         formRef.current,
-        "pX_2hasGmGcuvjXIW"
+        "EjKcQulWVOFshx4FE" // Updated with your Public Key
       )
       .then(() => {
         setSuccess(true);
