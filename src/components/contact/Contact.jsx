@@ -20,7 +20,7 @@ const variants = {
 
 const EMAILJS_SERVICE_ID = "service_w3jmpyr";
 const EMAILJS_TEMPLATE_ID = "template_v10u2oh";
-const EMAILJS_PUBLIC_KEY = "rvwNN43lwSCSYW-7";
+const EMAILJS_PUBLIC_KEY = "-rvwNN43lwSCSYW-7";
 
 const Contact = () => {
   const ref = useRef(null);
