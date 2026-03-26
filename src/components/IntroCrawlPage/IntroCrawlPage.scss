@@ -362,17 +362,8 @@
       animation: none;
     }
 
-    .scroll-text-window {
-      display: none;
-    }
-
-    .crawl-reader-overlay {
-      display: none;
-    }
-
-    .reflection-overlay {
-      opacity: 1;
-      pointer-events: auto;
+    .scroll-text-window .crawl-text {
+      animation-duration: 1ms;
     }
   }
 }
