@@ -1,7 +1,11 @@
 // File: /src/components/IntroCrawlPage/IntroCrawlPage.jsx
 
-import { useEffect, useRef, useState } from "react";
-import "./introCrawlPage.scss";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { useInView } from "framer-motion";
+import "./IntroCrawlPage.scss";
+
+const CRAWL_DURATION_MS = 65000;
+const PARAGRAPH_ADVANCE_MS = 12000;
 
 const crawlParagraphs = [
   "My entire life has been woven together with technology. From CISCO networking in high school to managing university lab systems, from teaching in Title I schools to building MERN apps with AI integration, tech has always been my throughline—and my refuge.",
@@ -11,76 +15,134 @@ const crawlParagraphs = [
   "In 2024, I completed UTSA’s Full Stack Web Development Bootcamp—an intensive program centered around the MERN stack. Over six months, I mastered over 60 technologies, simulating agile work environments and collaborating on real-world projects. My capstone, Ashlight, is a voice-first journaling platform powered by AI and built with a REST/GraphQL hybrid backend.",
   "I’m bilingual in English and Spanish, and I hold certifications in AI Prompting and Machine Learning. I’m endlessly curious, exceptionally creative, and deeply comfortable with complexity. Whether it’s front-end finesse, back-end logic, or the emotional intelligence needed to keep a team clicking—I bring it.",
   "I’m not looking to fit in—I’m looking to stand out with purpose. My dream? To lead, build, and one day co-found something transformative. Until then, I’m here: ready to contribute, learn, and uplift.",
-  "Who am I? Well, I am..."
+  "Who am I? Well, I am...",
 ];
 
 const IntroCrawlPage = () => {
-  const crawlRef = useRef();
+  const sectionRef = useRef(null);
+  const sequenceTimerRef = useRef(null);
+  const paragraphIntervalRef = useRef(null);
+
+  const isInView = useInView(sectionRef, {
+    amount: 0.35,
+    once: false,
+  });
+
   const [revealText, setRevealText] = useState(false);
   const [replayTrigger, setReplayTrigger] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [hasStarted, setHasStarted] = useState(false);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
+  const clearSequence = useCallback(() => {
+    if (sequenceTimerRef.current) {
+      window.clearTimeout(sequenceTimerRef.current);
+      sequenceTimerRef.current = null;
+    }
+
+    if (paragraphIntervalRef.current) {
+      window.clearInterval(paragraphIntervalRef.current);
+      paragraphIntervalRef.current = null;
+    }
+  }, []);
+
+  const startSequence = useCallback(() => {
+    clearSequence();
+
+    setHasStarted(true);
+    setRevealText(false);
+    setCurrentIndex(0);
+
+    sequenceTimerRef.current = window.setTimeout(() => {
       setRevealText(true);
-    }, 65000); // sync with crawl
+    }, CRAWL_DURATION_MS);
 
-    const paragraphInterval = setInterval(() => {
+    paragraphIntervalRef.current = window.setInterval(() => {
       setCurrentIndex((prev) =>
         prev < crawlParagraphs.length - 1 ? prev + 1 : prev
       );
-    }, 12000); // slowed down from 9000 to 12000 ms
+    }, PARAGRAPH_ADVANCE_MS);
+  }, [clearSequence]);
 
+  useEffect(() => {
+    if (isInView && !hasStarted) {
+      startSequence();
+    }
+  }, [isInView, hasStarted, startSequence]);
+
+  useEffect(() => {
     return () => {
-      clearTimeout(timer);
-      clearInterval(paragraphInterval);
+      clearSequence();
     };
-  }, [replayTrigger]);
+  }, [clearSequence]);
 
   const handleSkip = () => {
+    clearSequence();
+    setHasStarted(true);
     setRevealText(true);
     setCurrentIndex(crawlParagraphs.length - 1);
   };
 
   const handleReplay = () => {
-    setRevealText(false);
     setReplayTrigger((prev) => prev + 1);
-    setCurrentIndex(0);
+    startSequence();
   };
 
   return (
-    <section className="intro-crawl-section" aria-label="Intro Crawl Narrative">
-      <div className="scroll-hint-banner">
+    <section
+      ref={sectionRef}
+      className={`intro-crawl-section ${revealText ? "completed" : ""}`}
+      aria-label="Intro Crawl Narrative"
+    >
+      <div className="scroll-hint-banner" aria-hidden="true">
         <span>Feel free to scroll ↓</span>
       </div>
 
       <h2 className="about-me-title">About Me</h2>
 
-      <div className="crawl-reader-overlay">
+      <div
+        className="crawl-reader-overlay"
+        aria-live="polite"
+        aria-hidden={revealText}
+      >
         <p>{crawlParagraphs[currentIndex]}</p>
       </div>
 
-      <div className="scroll-text-window" key={replayTrigger}>
+      <div
+        className="scroll-text-window"
+        key={replayTrigger}
+        aria-hidden={revealText}
+      >
         <div className="crawl-fade-overlay" />
-        <article className="crawl-text" ref={crawlRef}>
-          {crawlParagraphs.slice(0, -1).map((paragraph, i) => (
-            <p key={i}>{paragraph}</p>
+        <article className="crawl-text">
+          {crawlParagraphs.slice(0, -1).map((paragraph, index) => (
+            <p key={index}>{paragraph}</p>
           ))}
           <p className="final-line">{crawlParagraphs.at(-1)}</p>
         </article>
       </div>
 
-      <div className={`reflection-overlay ${revealText ? "visible" : ""}`}>
+      <div
+        className={`reflection-overlay ${revealText ? "visible" : ""}`}
+        aria-live="polite"
+      >
         <p>
-          This journey is more than a scroll it is a transmission. A record of how tech,
-          creativity, and resilience converge to tell a story worth building on. If you are here,
-          you are already part of it.
+          This journey is more than a scroll; it is a transmission. A record of
+          how tech, creativity, and resilience converge to tell a story worth
+          building on. If you are here, you are already part of it.
         </p>
+
         <div className="controls">
           {!revealText && (
-            <button onClick={handleSkip}>Skip to Summary</button>
+            <button type="button" onClick={handleSkip}>
+              Skip to Summary
+            </button>
           )}
-          {revealText && <button onClick={handleReplay}>Replay</button>}
+
+          {revealText && (
+            <button type="button" onClick={handleReplay}>
+              Replay
+            </button>
+          )}
         </div>
       </div>
     </section>
