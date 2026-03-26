@@ -25,28 +25,30 @@ const Contact = () => {
 
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [sending, setSending] = useState(false);
 
   const sendEmail = (e) => {
     e.preventDefault();
-    
-    // Reset states on new submission attempt
     setError(false);
     setSuccess(false);
+    setSending(true);
 
     emailjs
       .sendForm(
-        "service_94y20xo",
+        "service_w3jmpyr",
         "template_v10u2oh",
         formRef.current,
-        "EjKcQulWVOFshx4FE" // Updated with your Public Key
+        "EjKcQuIWVOFshx4FE"
       )
       .then(() => {
         setSuccess(true);
-        formRef.current.reset(); // Clears form inputs on success
+        setSending(false);
+        formRef.current.reset();
       })
       .catch((err) => {
         console.error("EmailJS Error:", err);
         setError(true);
+        setSending(false);
       });
   };
 
@@ -59,7 +61,7 @@ const Contact = () => {
       whileInView="animate"
     >
       <motion.div className="textContainer" variants={variants}>
-        <motion.h1 variants={variants}>Let’s work together</motion.h1>
+        <motion.h1 variants={variants}>Let&apos;s work together</motion.h1>
 
         <motion.div className="item" variants={variants}>
           <h2>Mail</h2>
@@ -118,9 +120,19 @@ const Contact = () => {
           <input type="text" name="name" required placeholder="Name" />
           <input type="email" name="email" required placeholder="Email" />
           <textarea rows={8} name="message" required placeholder="Message" />
-          <button type="submit">Submit</button>
-          {error && <span>Error: Message failed to send.</span>}
-          {success && <span>Success: Your message has been sent!</span>}
+          <button type="submit" disabled={sending}>
+            {sending ? "Sending..." : "Submit"}
+          </button>
+          {error && (
+            <span className="status error">
+              Error: Message failed to send. Please try again.
+            </span>
+          )}
+          {success && (
+            <span className="status success">
+              Message sent! I&apos;ll be in touch soon.
+            </span>
+          )}
         </motion.form>
       </div>
     </motion.div>

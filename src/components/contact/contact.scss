@@ -81,9 +81,28 @@
         background-color: orange;
         cursor: pointer;
         font-weight: 500;
+        transition: opacity 0.2s;
+
+        &:disabled {
+          opacity: 0.6;
+          cursor: not-allowed;
+        }
 
         @include mobile {
           padding: 10px;
+        }
+      }
+
+      .status {
+        font-size: 14px;
+        padding: 4px 0;
+
+        &.error {
+          color: #ff6b6b;
+        }
+
+        &.success {
+          color: #69db7c;
         }
       }
     }
