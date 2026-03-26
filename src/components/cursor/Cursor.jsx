@@ -21,8 +21,8 @@ const Cursor = () => {
     <motion.div
       className="cursor"
       animate={{
-        x: position.x + 10,
-        y: position.y + 10,
+        x: position.x, // Removed the +10 offset causing misalignment
+        y: position.y, // Removed the +10 offset causing misalignment
       }}
       transition={{ type: "spring", stiffness: 400, damping: 30 }}
     />
