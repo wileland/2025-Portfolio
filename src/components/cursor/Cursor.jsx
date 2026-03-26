@@ -21,10 +21,15 @@ const Cursor = () => {
     <motion.div
       className="cursor"
       animate={{
-        x: position.x, // Removed the +10 offset causing misalignment
-        y: position.y, // Removed the +10 offset causing misalignment
+        /**
+         * Centering logic: 
+         * To align the center of the cursor circle with the mouse tip, 
+         * we subtract half of the cursor's width/height (standard is 50px).
+         */
+        x: position.x - 25, 
+        y: position.y - 25,
       }}
-      transition={{ type: "spring", stiffness: 400, damping: 30 }}
+      transition={{ type: "spring", stiffness: 500, damping: 28 }}
     />
   );
 };

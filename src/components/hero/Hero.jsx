@@ -41,6 +41,16 @@ const sliderVariants = {
 const Hero = () => {
   return (
     <div className="hero">
+      {/* Moved this to the top of the container so it renders as the background layer */}
+      <motion.div
+        className="slidingTextContainer"
+        variants={sliderVariants}
+        initial="initial"
+        animate="animate"
+      >
+        Full Stack Engineer · AI Builder · Storybuilder
+      </motion.div>
+
       <div className="wrapper">
         <motion.div
           className="textContainer"
@@ -53,12 +63,17 @@ const Hero = () => {
             MERN Stack Developer | AI Explorer | Storybuilder
           </motion.h1>
           <motion.div className="buttons" variants={textVariants}>
-            <motion.button variants={textVariants}>
-              <a href="#Portfolio">See the Latest Works</a>
-            </motion.button>
-            <motion.button variants={textVariants}>
-              <a href="#Contact">Contact Me</a>
-            </motion.button>
+            {/* Swapped a and button tags: a tags must wrap buttons for valid HTML and clickability */}
+            <a href="#Portfolio">
+              <motion.button variants={textVariants}>
+                See the Latest Works
+              </motion.button>
+            </a>
+            <a href="#Contact">
+              <motion.button variants={textVariants}>
+                Contact Me
+              </motion.button>
+            </a>
           </motion.div>
           <motion.img
             src="/scroll.png"
@@ -68,15 +83,6 @@ const Hero = () => {
           />
         </motion.div>
       </div>
-
-      <motion.div
-        className="slidingTextContainer"
-        variants={sliderVariants}
-        initial="initial"
-        animate="animate"
-      >
-        Full Stack Engineer · AI Builder · Storybuilder
-      </motion.div>
 
       <div className="imageContainer">
         <img src="/hero.png" alt="Hero illustration" />
