@@ -1,3 +1,5 @@
+// File Location: src/components/contact/Contact.jsx
+
 import { useRef, useState } from "react";
 import "./contact.scss";
 import { motion, useInView } from "framer-motion";
@@ -28,6 +30,10 @@ const Contact = () => {
 
   const sendEmail = (e) => {
     e.preventDefault();
+    
+    // Reset states on new submission attempt
+    setError(false);
+    setSuccess(false);
 
     emailjs
       .sendForm(
@@ -36,10 +42,14 @@ const Contact = () => {
         formRef.current,
         "pX_2hasGmGcuvjXIW"
       )
-      .then(
-        () => setSuccess(true),
-        () => setError(true)
-      );
+      .then(() => {
+        setSuccess(true);
+        formRef.current.reset(); // Clears form inputs on success
+      })
+      .catch((err) => {
+        console.error("EmailJS Error:", err);
+        setError(true);
+      });
   };
 
   return (
@@ -55,17 +65,17 @@ const Contact = () => {
 
         <motion.div className="item" variants={variants}>
           <h2>Mail</h2>
-          <span>hello@react.dev</span>
+          <span>wileland7@gmail.com</span>
         </motion.div>
 
         <motion.div className="item" variants={variants}>
-          <h2>Address</h2>
-          <span>Hello street, New York</span>
+          <h2>Location</h2>
+          <span>San Antonio, TX</span>
         </motion.div>
 
         <motion.div className="item" variants={variants}>
           <h2>Phone</h2>
-          <span>+1 234 5678</span>
+          <span>(210) 775-8143</span>
         </motion.div>
       </motion.div>
 
@@ -109,10 +119,10 @@ const Contact = () => {
         >
           <input type="text" name="name" required placeholder="Name" />
           <input type="email" name="email" required placeholder="Email" />
-          <textarea rows={8} name="message" placeholder="Message" />
+          <textarea rows={8} name="message" required placeholder="Message" />
           <button type="submit">Submit</button>
-          {error && <span>Error</span>}
-          {success && <span>Success</span>}
+          {error && <span>Error: Message failed to send.</span>}
+          {success && <span>Success: Your message has been sent!</span>}
         </motion.form>
       </div>
     </motion.div>
