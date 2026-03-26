@@ -17,17 +17,21 @@ const Navbar = () => {
         </motion.span>
 
         <nav className="social" aria-label="Social Links">
-          <a href="#" aria-label="Facebook">
-            <img src="/facebook.png" alt="Facebook" />
+          <a 
+            href="https://www.linkedin.com/in/williamhaynesxp/" 
+            target="_blank" 
+            rel="noreferrer" 
+            aria-label="LinkedIn"
+          >
+            <img src="/linkedin.svg" alt="LinkedIn" />
           </a>
-          <a href="#" aria-label="Instagram">
-            <img src="/instagram.png" alt="Instagram" />
-          </a>
-          <a href="#" aria-label="YouTube">
-            <img src="/youtube.png" alt="YouTube" />
-          </a>
-          <a href="#" aria-label="Dribbble">
-            <img src="/dribbble.png" alt="Dribbble" />
+          <a 
+            href="https://github.com/wileland" 
+            target="_blank" 
+            rel="noreferrer" 
+            aria-label="GitHub"
+          >
+            <img src="/github.svg" alt="GitHub" />
           </a>
         </nav>
       </div>

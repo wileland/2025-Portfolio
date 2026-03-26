@@ -73,7 +73,7 @@ const Hero = () => {
         initial="initial"
         animate="animate"
       >
-        Writer Content Creator Influencer
+        Full Stack Engineer · AI Builder · Storybuilder
       </motion.div>
 
       <div className="imageContainer">
