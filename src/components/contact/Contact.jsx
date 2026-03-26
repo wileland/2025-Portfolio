@@ -38,7 +38,7 @@ const Contact = () => {
         "service_94y20xo",
         "template_v10u2oh",
         formRef.current,
-        "EjKcQulWVOFshx4FE" // Verified Public Key
+        "EjKcQulWVOFshx4FE" // Updated with your Public Key
       )
       .then(() => {
         setSuccess(true);

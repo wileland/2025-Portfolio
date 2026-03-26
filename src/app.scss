@@ -17,6 +17,7 @@ html {
 body {
   background-color: #0c0c1d;
   color: lightgray;
+  overflow-x: hidden;
 }
 
 a {
@@ -24,10 +25,15 @@ a {
   color: inherit;
 }
 
+img {
+  display: block;
+  max-width: 100%;
+}
+
 section {
-  height: 100vh;
-  width: 100vw;
-  scroll-snap-align: center;
+  min-height: 100vh;
+  width: 100%;
+  scroll-snap-align: start;
   overflow: hidden;
 }
 
@@ -50,5 +56,26 @@ section {
 @mixin desktop {
   @media (max-width: 1366px) {
     @content;
+  }
+}
+
+/* -----------------------------------------------
+   Mobile / Small Viewport Fixes
+-------------------------------------------------- */
+
+@media (max-width: 738px) {
+  html {
+    scroll-snap-type: none;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+
+  section {
+    min-height: 100svh;
+    height: auto;
+    width: 100%;
+    overflow: visible;
   }
 }
