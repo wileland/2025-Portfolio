@@ -36,6 +36,32 @@
       }
     }
 
+    .contact-pitch {
+      font-size: 16px;
+      font-weight: 300;
+      color: gray;
+      line-height: 1.6;
+      max-width: 420px;
+
+      @include mobile {
+        font-size: 14px;
+        max-width: 100%;
+      }
+    }
+
+    .item {
+      a {
+        color: white;
+        text-decoration: underline;
+        font-weight: 300;
+        transition: color 0.2s;
+
+        &:hover {
+          color: orange;
+        }
+      }
+    }
+
     span {
       font-weight: 300;
     }
@@ -99,6 +125,11 @@
 
         &.error {
           color: #ff6b6b;
+
+          a {
+            color: #ff6b6b;
+            text-decoration: underline;
+          }
         }
 
         &.success {

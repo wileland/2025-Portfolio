@@ -19,6 +19,25 @@ const variants = {
   },
 };
 
+const architectureLayers = [
+  {
+    title: "Voice Archive",
+    desc: "Users record in their own voice. Audio is captured, transcribed, and stored as a durable source artifact — replayable, searchable, never paraphrased away. The recording is the receipt.",
+  },
+  {
+    title: "Memory & Retrieval",
+    desc: "Every entry lives in MongoDB Atlas with provenance-aware metadata. Archive search surfaces exact past entries. The system knows what was said, when, and in what context — no hallucinated recall.",
+  },
+  {
+    title: "Reflection Engine",
+    desc: "AI-assisted summaries and reflections are generated strictly from the user's own archived language. Bounded claims only. No diagnosis. No invention. The model reflects; the user decides what it means.",
+  },
+  {
+    title: "Practice Layer",
+    desc: "Crucible trials and emotional intelligence training loops built on top of the archive. Record → reflect → recognize → grow. The system turns memory into a structured, repeatable practice — not a passive journal.",
+  },
+];
+
 const Services = () => {
   const ref = useRef();
   const isInView = useInView(ref, { margin: "-100px" });
@@ -29,49 +48,51 @@ const Services = () => {
       ref={ref}
       variants={variants}
       initial="initial"
-      animate="animate"
-      aria-label="Services Section"
+      animate={isInView ? "animate" : "initial"}
+      aria-label="Echo Doj0 Architecture"
     >
       <motion.div className="textContainer" variants={variants}>
         <p>
-          I focus on helping your brand grow
+          Echo Doj0 is a full-stack AI system.
           <br />
-          and move forward
+          Every layer is load-bearing.
         </p>
         <hr />
       </motion.div>
 
       <motion.div className="titleContainer" variants={variants}>
         <div className="title">
-          <img src="/people.webp" alt="People working together" loading="lazy" />
+          <img src="/people.webp" alt="System architecture diagram" loading="lazy" />
           <h1>
-            <motion.b whileHover={{ color: "orange" }}>Unique</motion.b> Ideas
+            <motion.b whileHover={{ color: "orange" }}>Echo</motion.b> Doj0
           </h1>
         </div>
         <div className="title">
           <h1>
-            <motion.b whileHover={{ color: "orange" }}>For Your</motion.b>{" "}
-            Business.
+            <motion.b whileHover={{ color: "orange" }}>Architecture</motion.b>{" "}
+            Layers.
           </h1>
-          <button aria-label="See what we do">WHAT WE DO?</button>
+          <a
+            href="https://github.com/wileland/echo-dojo-showcase"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="View Echo Doj0 architecture showcase on GitHub"
+            className="architecture-link-btn"
+          >
+            SEE THE SHOWCASE
+          </a>
         </div>
       </motion.div>
 
       <motion.div className="listContainer" variants={variants}>
-        {[...Array(4)].map((_, index) => (
+        {architectureLayers.map((layer) => (
           <motion.div
             className="box"
-            key={index}
+            key={layer.title}
             whileHover={{ background: "lightgray", color: "black" }}
           >
-            <h2>Branding</h2>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-              libero enim nisi aliquam consectetur expedita magni eius ex
-              corrupti animi! Ad nam pariatur assumenda quae mollitia libero
-              repellat explicabo maiores?
-            </p>
-            <button aria-label="Explore Branding Service">Go</button>
+            <h2>{layer.title}</h2>
+            <p>{layer.desc}</p>
           </motion.div>
         ))}
       </motion.div>

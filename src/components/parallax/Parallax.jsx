@@ -29,9 +29,9 @@ const Parallax = ({ type }) => {
         style={{ y: yText }}
       >
         {type === "services" ? (
-          <span className="catalyst-text-animated">The Catalyst.</span>
+          <span className="catalyst-text-animated">What I Built.</span>
         ) : (
-          "What We Did?"
+          "The Evidence."
         )}
       </motion.h1>
 

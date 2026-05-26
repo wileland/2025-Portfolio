@@ -5,13 +5,14 @@ import "./IntroCrawlPage.scss";
 const READER_STEP_MS = 8000;
 
 const crawlParagraphs = [
-  "I am William L. Haynes — a former English and ESOL educator who transitioned into software engineering with a focus on full-stack development, AI-forward product thinking, and user-centered problem solving.",
-  "My path into tech did not begin yesterday. From CISCO networking in high school to managing university lab systems and AV infrastructure at Texas A&M International University, I learned early how to work with systems, troubleshoot calmly, and support people through complexity.",
-  "I later spent a decade teaching in Texas public schools. That work sharpened the skills I now bring into engineering: communication, leadership, adaptability, documentation, empathy, and the ability to break difficult problems into clear, teachable steps.",
-  "In 2024, I completed UTSA’s Full Stack Web Development Bootcamp, where I built production-style projects across the MERN stack. Since then, I have continued building across React, Node.js, Express, MongoDB, REST APIs, GraphQL, and real-time application patterns.",
-  "My work includes projects like Quizard, a real-time quiz platform powered by Socket.IO, as well as AI-native concepts such as Ashlight and Echo Doj0, where voice, memory, journaling, and interface design converge into more human software experiences.",
-  "I am bilingual in English and Spanish, comfortable across front end and back end responsibilities, and especially strong where technical execution meets communication, product thinking, and clarity.",
-  "I am seeking opportunities where I can contribute as a software engineer, full-stack developer, or AI-adjacent builder — someone who can ship, learn fast, collaborate well, and bring both rigor and imagination to the work.",
+  "I am William L. Haynes — a former educator who spent ten years in San Antonio classrooms before building one of the most architecturally complete solo AI projects I know of: Echo Doj0.",
+  "Teaching was not a detour. A decade of ESOL and English instruction sharpened the exact instincts that make a founding engineer dangerous: the ability to break complex systems into legible steps, to document clearly under pressure, to understand what a user actually needs rather than what they say they want.",
+  "In 2024 I pivoted hard into full-stack engineering. UTSA bootcamp gave me the foundation. The year that followed gave me the proof. I stopped building toy apps and started building a real product — one with a real architecture problem at its center.",
+  "That product is Echo Doj0: a private-first voice memory archive and AI reflection platform. The premise is simple and hard: let people record their own words, store them durably, and receive AI-assisted reflections grounded only in what they actually said.",
+  "The architecture is not simple. React and Vite on the frontend. Node and Express on the backend. GraphQL API surface. MongoDB Atlas for durable, provenance-aware memory storage. BullMQ-style async orchestration for the audio and transcription pipeline. Every layer of the stack is present and load-bearing.",
+  "Echo Doj0 does not diagnose. It does not invent. It reflects — archive-backed, bounded, grounded in the user’s own language. The AI output carries a receipt. The system earns its claims.",
+  "I built this solo. That is the proof. Not a tutorial. Not a team project. A working system with real decisions at every layer — infrastructure, API design, memory architecture, product positioning, and the discipline to ship without cutting the corners that matter.",
+  "I am ready for founding engineer, full-stack AI, and product engineering roles. If you need someone who can architect, build, explain, and sustain a complex product — Echo Doj0 is the evidence.",
   "William L. Haynes.",
 ];
 
@@ -78,15 +79,16 @@ const IntroCrawlPage = () => {
 
   return (
     <section
+      id="Origin"
       ref={sectionRef}
       className="intro-crawl-section"
-      aria-label="About Me"
+      aria-label="Origin Story"
     >
       <div className="scroll-hint-banner" aria-hidden="true">
         <span>Stay for the crawl or scroll on ↓</span>
       </div>
 
-      <h2 className="about-me-title">About Me</h2>
+      <h2 className="about-me-title">Origin Story</h2>
 
       {!showSummary && (
         <>
@@ -113,15 +115,16 @@ const IntroCrawlPage = () => {
 
       <div className={`reflection-overlay ${showSummary ? "visible" : ""}`}>
         <p className="summary-kicker">
-          Former educator. Full-stack builder. AI-forward storyteller.
+          Former educator. Founding engineer. Echo Doj0 is the proof.
         </p>
 
         <p>
-          I build software with a rare combination of technical range,
-          communication strength, and human-centered thinking. I am looking for
-          roles where I can contribute as a software engineer or full-stack
-          developer, grow fast, and help ship products that are both useful and
-          memorable.
+          Ten years in the classroom built instincts that transfer directly to
+          engineering: systems thinking, clear documentation, and a deep read on
+          what users actually need. Echo Doj0 — a private-first voice memory
+          archive with a receipt-grounded AI reflection layer — is the proof of
+          work. Built solo, full-stack, architecturally complete. Ready for
+          founding engineer, full-stack AI, and mission-driven product roles.
         </p>
 
         <div className="controls">

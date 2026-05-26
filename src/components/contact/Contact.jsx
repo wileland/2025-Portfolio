@@ -18,9 +18,10 @@ const variants = {
   },
 };
 
-const EMAILJS_SERVICE_ID = "service_w3jmpyr";
-const EMAILJS_TEMPLATE_ID = "template_xrfn9rv";
-const EMAILJS_PUBLIC_KEY = "-rvwNN43lwSCSYW-7";
+const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+const emailJsReady = Boolean(serviceId && templateId && publicKey);
 
 const Contact = () => {
   const ref = useRef(null);
@@ -34,23 +35,22 @@ const Contact = () => {
   const sendEmail = async (e) => {
     e.preventDefault();
 
+    if (!emailJsReady) {
+      setError("Contact form is not configured. Please email me directly at wileland7@gmail.com.");
+      return;
+    }
+
     setError("");
     setSuccess("");
     setSending(true);
 
     try {
-      await emailjs.sendForm(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID,
-        formRef.current,
-        EMAILJS_PUBLIC_KEY
-      );
-
-      setSuccess("Message sent! I’ll be in touch soon.");
+      await emailjs.sendForm(serviceId, templateId, formRef.current, publicKey);
+      setSuccess("Message sent! I'll be in touch soon.");
       formRef.current?.reset();
     } catch (err) {
       console.error("EmailJS Error:", err);
-      setError("Message failed to send. Please try again.");
+      setError("Message failed to send. Please try emailing wileland7@gmail.com directly.");
     } finally {
       setSending(false);
     }
@@ -65,11 +65,17 @@ const Contact = () => {
       whileInView="animate"
     >
       <motion.div className="textContainer" variants={variants}>
-        <motion.h1 variants={variants}>Let&apos;s work together</motion.h1>
+        <motion.h1 variants={variants}>Let&apos;s build something real</motion.h1>
+
+        <motion.p variants={variants} className="contact-pitch">
+          Open to founding engineer, full-stack AI, and mission-driven product
+          engineering roles. If you&apos;re building something that requires
+          both technical depth and human-centered thinking — let&apos;s talk.
+        </motion.p>
 
         <motion.div className="item" variants={variants}>
-          <h2>Mail</h2>
-          <span>wileland7@gmail.com</span>
+          <h2>Email</h2>
+          <a href="mailto:wileland7@gmail.com">wileland7@gmail.com</a>
         </motion.div>
 
         <motion.div className="item" variants={variants}>
@@ -78,8 +84,25 @@ const Contact = () => {
         </motion.div>
 
         <motion.div className="item" variants={variants}>
-          <h2>Phone</h2>
-          <span>(210) 775-8143</span>
+          <h2>GitHub</h2>
+          <a
+            href="https://github.com/wileland"
+            target="_blank"
+            rel="noreferrer"
+          >
+            github.com/wileland
+          </a>
+        </motion.div>
+
+        <motion.div className="item" variants={variants}>
+          <h2>LinkedIn</h2>
+          <a
+            href="https://www.linkedin.com/in/williamhaynesxp/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            linkedin.com/in/williamhaynesxp
+          </a>
         </motion.div>
       </motion.div>
 
@@ -128,7 +151,13 @@ const Contact = () => {
             {sending ? "Sending..." : "Submit"}
           </button>
 
-          {error && <span className="status error">Error: {error}</span>}
+          {!emailJsReady && (
+            <span className="status error">
+              Contact form unavailable — email me at{" "}
+              <a href="mailto:wileland7@gmail.com">wileland7@gmail.com</a>
+            </span>
+          )}
+          {error && <span className="status error">{error}</span>}
           {success && <span className="status success">{success}</span>}
         </motion.form>
       </div>

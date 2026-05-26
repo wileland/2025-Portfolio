@@ -50,11 +50,11 @@ const Hero = () => {
         >
           <motion.h2 variants={textVariants}>William L. Haynes</motion.h2>
           <motion.h1 variants={textVariants}>
-            MERN Stack Developer | AI Explorer | Storybuilder
+            Founding Engineer · Full-Stack AI · Echo Doj0
           </motion.h1>
           <motion.div className="buttons" variants={textVariants}>
             <motion.button variants={textVariants}>
-              <a href="#Portfolio">See the Latest Works</a>
+              <a href="#Portfolio">Explore Echo Doj0</a>
             </motion.button>
             <motion.button variants={textVariants}>
               <a href="#Contact">Contact Me</a>
@@ -75,7 +75,7 @@ const Hero = () => {
         initial="initial"
         animate="animate"
       >
-        Full Stack Engineer · AI Builder · Storybuilder
+        Private-first AI memory · GraphQL · MongoDB Atlas · Voice pipeline · Receipt-grounded reflection
       </motion.div>
 
       <div className="imageContainer">
