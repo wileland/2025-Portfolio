@@ -5,27 +5,43 @@ import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 const items = [
   {
     id: 1,
-    title: "React Commerce",
-    img: "https://images.pexels.com/photos/18073372/pexels-photo-18073372/free-photo-of-young-man-sitting-in-a-car-on-a-night-street.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
-    desc: "A responsive React-based eCommerce storefront with cart functionality, product listings, and modular architecture.",
+    title: "Echo Doj0 — Private-First AI Memory Platform",
+    img: "https://images.pexels.com/photos/577585/pexels-photo-577585.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    desc: "A full-stack voice memory archive and AI reflection platform. Users record in their own voice; transcriptions are stored in MongoDB Atlas with provenance-aware metadata. The AI reflection layer generates summaries grounded only in the user's archived language — receipt-grounded, bounded claims, no diagnosis. Built solo across React, Node/Express, GraphQL, and an async audio pipeline.",
+    link: "https://ashlight-frontend.onrender.com",
+    linkLabel: "Open Live App",
+    repo: "https://github.com/wileland/echo-dojo-showcase",
+    repoLabel: "View Showcase Repo",
   },
   {
     id: 2,
-    title: "Next.js Blog",
-    img: "https://images.pexels.com/photos/18023772/pexels-photo-18023772/free-photo-of-close-up-of-a-person-holding-a-wristwatch.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
-    desc: "A statically generated blog using Next.js, Markdown rendering, dynamic routing, and SEO enhancements.",
+    title: "Echo Doj0 — Architecture Showcase",
+    img: "https://images.pexels.com/photos/270408/pexels-photo-270408.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    desc: "A public technical case study and architecture documentation surface for Echo Doj0. Covers system design decisions, API structure, memory architecture, and the rationale behind the private-first, receipt-grounded design. Built to serve as an honest, auditable proof-of-work for engineering conversations.",
+    link: "https://github.com/wileland/echo-dojo-showcase",
+    linkLabel: "View on GitHub",
+    repo: null,
+    repoLabel: null,
   },
   {
     id: 3,
-    title: "Vanilla JS App",
-    img: "https://images.pexels.com/photos/6894528/pexels-photo-6894528.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
-    desc: "A pure JavaScript project built without frameworks, demonstrating DOM manipulation and modular design.",
+    title: "Quizard — Real-Time Quiz Platform",
+    img: "https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    desc: "A real-time multiplayer quiz platform built with Socket.IO, Node/Express, and React. Supports live game rooms, synchronized question delivery, and instant scoring across concurrent players. Demonstrates real-time event architecture, stateful session management, and responsive UI under live conditions.",
+    link: "https://github.com/wileland",
+    linkLabel: "View on GitHub",
+    repo: null,
+    repoLabel: null,
   },
   {
     id: 4,
-    title: "Music App",
-    img: "https://images.pexels.com/photos/18540208/pexels-photo-18540208/free-photo-of-wood-landscape-water-hill.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    desc: "A full-featured music player with playlist controls, audio visualizer, and artist search integration.",
+    title: "This Portfolio — Founder Communication Layer",
+    img: "https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    desc: "A Vite/React animated portfolio built to position Echo Doj0 and its builder for founding engineer, full-stack AI, and mission-driven product roles. The site itself is a product-positioning artifact — cinematic shell, real content, no filler. Architecture and copy authored by William L. Haynes.",
+    link: "https://github.com/wileland",
+    linkLabel: "GitHub Profile",
+    repo: null,
+    repoLabel: null,
   },
 ];
 
@@ -41,17 +57,35 @@ const Single = ({ item }) => {
           <div className="imageContainer" ref={ref}>
             <img
               src={item.img}
-              alt={`Screenshot of ${item.title}`}
+              alt={`Project: ${item.title}`}
               loading="lazy"
             />
           </div>
-          <motion.div
-            className="textContainer"
-            style={{ y }}
-          >
+          <motion.div className="textContainer" style={{ y }}>
             <h2>{item.title}</h2>
             <p>{item.desc}</p>
-            <button aria-label={`See demo of ${item.title}`}>See Demo</button>
+            <div className="projectLinks">
+              <a
+                href={item.link}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`${item.linkLabel} for ${item.title}`}
+                className="project-btn"
+              >
+                {item.linkLabel}
+              </a>
+              {item.repo && (
+                <a
+                  href={item.repo}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={`${item.repoLabel} for ${item.title}`}
+                  className="project-btn project-btn--secondary"
+                >
+                  {item.repoLabel}
+                </a>
+              )}
+            </div>
           </motion.div>
         </div>
       </div>
@@ -74,7 +108,7 @@ const Portfolio = () => {
   return (
     <div className="portfolio" ref={ref}>
       <header className="progress" aria-label="Project Showcase Progress">
-        <h1>Featured Works</h1>
+        <h1>Proof of Work</h1>
         <motion.div className="progressBar" style={{ scaleX }} />
       </header>
 
