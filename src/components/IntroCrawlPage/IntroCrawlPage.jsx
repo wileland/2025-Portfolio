@@ -1,145 +1,66 @@
-import { useCallback, useEffect, useRef, useState } from "react";
-import { useInView } from "framer-motion";
 import "./IntroCrawlPage.scss";
 
-const READER_STEP_MS = 8000;
-
-const crawlParagraphs = [
-  "I am William L. Haynes — a former educator who spent ten years in San Antonio classrooms before building one of the most architecturally complete solo AI projects I know of: Echo Doj0.",
-  "Teaching was not a detour. A decade of ESOL and English instruction sharpened the exact instincts that make a founding engineer dangerous: the ability to break complex systems into legible steps, to document clearly under pressure, to understand what a user actually needs rather than what they say they want.",
-  "In 2024 I pivoted hard into full-stack engineering. UTSA bootcamp gave me the foundation. The year that followed gave me the proof. I stopped building toy apps and started building a real product — one with a real architecture problem at its center.",
-  "That product is Echo Doj0: a private-first voice memory archive and AI reflection platform. The premise is simple and hard: let people record their own words, store them durably, and receive AI-assisted reflections grounded only in what they actually said.",
-  "The architecture is not simple. React and Vite on the frontend. Node and Express on the backend. GraphQL API surface. MongoDB Atlas for durable, provenance-aware memory storage. BullMQ-style async orchestration for the audio and transcription pipeline. Every layer of the stack is present and load-bearing.",
-  "Echo Doj0 does not diagnose. It does not invent. It reflects — archive-backed, bounded, grounded in the user’s own language. The AI output carries a receipt. The system earns its claims.",
-  "I built this solo. That is the proof. Not a tutorial. Not a team project. A working system with real decisions at every layer — infrastructure, API design, memory architecture, product positioning, and the discipline to ship without cutting the corners that matter.",
-  "I am ready for founding engineer, full-stack AI, and product engineering roles. If you need someone who can architect, build, explain, and sustain a complex product — Echo Doj0 is the evidence.",
-  "William L. Haynes.",
-];
-
 const IntroCrawlPage = () => {
-  const sectionRef = useRef(null);
-  const readerIntervalRef = useRef(null);
-
-  const isInView = useInView(sectionRef, {
-    amount: 0.35,
-    once: false,
-  });
-
-  const [hasStarted, setHasStarted] = useState(false);
-  const [showSummary, setShowSummary] = useState(false);
-  const [readerIndex, setReaderIndex] = useState(0);
-  const [crawlRunId, setCrawlRunId] = useState(0);
-
-  const clearReaderInterval = useCallback(() => {
-    if (readerIntervalRef.current) {
-      window.clearInterval(readerIntervalRef.current);
-      readerIntervalRef.current = null;
-    }
-  }, []);
-
-  const finishCrawl = useCallback(() => {
-    clearReaderInterval();
-    setShowSummary(true);
-    setReaderIndex(crawlParagraphs.length - 1);
-  }, [clearReaderInterval]);
-
-  const startCrawl = useCallback(() => {
-    clearReaderInterval();
-    setHasStarted(true);
-    setShowSummary(false);
-    setReaderIndex(0);
-    setCrawlRunId((prev) => prev + 1);
-
-    readerIntervalRef.current = window.setInterval(() => {
-      setReaderIndex((prev) =>
-        prev < crawlParagraphs.length - 1 ? prev + 1 : prev
-      );
-    }, READER_STEP_MS);
-  }, [clearReaderInterval]);
-
-  useEffect(() => {
-    if (isInView && !hasStarted) {
-      startCrawl();
-    }
-  }, [isInView, hasStarted, startCrawl]);
-
-  useEffect(() => {
-    return () => {
-      clearReaderInterval();
-    };
-  }, [clearReaderInterval]);
-
-  const handleSkip = () => {
-    finishCrawl();
-  };
-
-  const handleReplay = () => {
-    startCrawl();
-  };
-
   return (
     <section
       id="Origin"
-      ref={sectionRef}
       className="intro-crawl-section"
       aria-label="Origin Story"
     >
-      <div className="scroll-hint-banner" aria-hidden="true">
-        <span>Stay for the crawl or scroll on ↓</span>
-      </div>
+      <div className="origin-content">
+        <header>
+          <p className="origin-kicker">Origin Story</p>
+          <h2 className="origin-title">From classroom systems to full-stack AI.</h2>
+          <p className="origin-lead">
+            I spent a decade teaching people to read critically and write with precision.
+            Those instincts did not stop being useful when I started building software.
+            Echo Doj0 is what happens when a novelist&apos;s ear and an engineer&apos;s rigor
+            work on the same problem.
+          </p>
+        </header>
 
-      <h2 className="about-me-title">Origin Story</h2>
-
-      {!showSummary && (
-        <>
-          <div className="crawl-reader-overlay" aria-live="polite">
-            <p>{crawlParagraphs[readerIndex]}</p>
-          </div>
-
-          <div className="scroll-text-window">
-            <div className="crawl-fade-overlay" />
-            <article
-              key={crawlRunId}
-              className="crawl-text"
-              onAnimationEnd={finishCrawl}
-              aria-label="Animated intro crawl"
-            >
-              {crawlParagraphs.slice(0, -1).map((paragraph, index) => (
-                <p key={index}>{paragraph}</p>
-              ))}
-              <p className="final-line">{crawlParagraphs.at(-1)}</p>
-            </article>
-          </div>
-        </>
-      )}
-
-      <div className={`reflection-overlay ${showSummary ? "visible" : ""}`}>
-        <p className="summary-kicker">
-          Former educator. Founding engineer. Echo Doj0 is the proof.
-        </p>
-
-        <p>
-          Ten years in the classroom built instincts that transfer directly to
-          engineering: systems thinking, clear documentation, and a deep read on
-          what users actually need. Echo Doj0 — a private-first voice memory
-          archive with a receipt-grounded AI reflection layer — is the proof of
-          work. Built solo, full-stack, architecturally complete. Ready for
-          founding engineer, full-stack AI, and mission-driven product roles.
-        </p>
-
-        <div className="controls">
-          {!showSummary && (
-            <button type="button" onClick={handleSkip}>
-              Skip to Summary
-            </button>
-          )}
-
-          {showSummary && (
-            <button type="button" onClick={handleReplay}>
-              Replay Crawl
-            </button>
-          )}
+        <div className="origin-card-grid">
+          <article className="origin-card">
+            <h3>Teacher&apos;s Eye</h3>
+            <p>
+              A decade in ESOL and English classrooms trained me to diagnose confusion
+              quickly, translate complexity into legible steps, and design systems that meet
+              users where they actually are — not where we wish they were.
+            </p>
+          </article>
+          <article className="origin-card">
+            <h3>Builder&apos;s Proof</h3>
+            <p>
+              Echo Doj0 is the proof artifact: 1,500+ pull requests, solo, no funding.
+              The app gives users back their own words, weighted by what they actually mean.
+              Same rigor as enterprise agentic RAG. Higher intimacy. More human stakes.
+            </p>
+          </article>
+          <article className="origin-card">
+            <h3>Architecture That Earns It</h3>
+            <p>
+              MERN + GraphQL + BullMQ + MongoDB Atlas Vector Search + Whisper + Langfuse.
+              Every layer is load-bearing. The hallucination firewall has never been lowered.
+              The quality bar stayed high because regressions were treated as product
+              problems, not chores. Rigor under pressure is a feature, not a habit.
+            </p>
+          </article>
+          <article className="origin-card">
+            <h3>Founding Engineer Signal</h3>
+            <p>
+              As AI drives execution costs toward zero, demand shifts to higher-order skills:
+              emotional intelligence, trust, high-context judgment. Echo Doj0 is the training
+              infrastructure for those skills. I am looking for founding engineer roles where
+              product soul and engineering rigor have to coexist.
+            </p>
+          </article>
         </div>
+
+        <p className="origin-proof-line">
+          Echo Doj0 is not a tutorial project. It is the artifact built to prove a full
+          product loop can be carried from idea to architecture to shipped experience —
+          solo, principled, documented.
+        </p>
       </div>
     </section>
   );

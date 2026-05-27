@@ -21,20 +21,20 @@ const variants = {
 
 const architectureLayers = [
   {
-    title: "Voice Archive",
-    desc: "Users record in their own voice. Audio is captured, transcribed, and stored as a durable source artifact — replayable, searchable, never paraphrased away. The recording is the receipt.",
+    title: "Archive",
+    desc: "Entries are designed around provenance: every AI insight should trace back to the user's exact words. The archive is the load-bearing stone — all other layers serve it. The game serves the archive. Never the reverse.",
   },
   {
-    title: "Memory & Retrieval",
-    desc: "Every entry lives in MongoDB Atlas with provenance-aware metadata. Archive search surfaces exact past entries. The system knows what was said, when, and in what context — no hallucinated recall.",
+    title: "Analysis",
+    desc: "Vibe Gravity measures the delta between stated identity and demonstrated behavior — derived from voice, not self-report. Private. Never public. Never a visible score. The math runs silently beneath everything the user sees.",
   },
   {
-    title: "Reflection Engine",
-    desc: "AI-assisted summaries and reflections are generated strictly from the user's own archived language. Bounded claims only. No diagnosis. No invention. The model reflects; the user decides what it means.",
+    title: "Gameplay",
+    desc: "Crucible trials. Experience Packs. Receipt-governed XP. Receipt before reward — the PracticeAttempt is witness before anything is granted. Goodhart's Law compliance is architectural, not policy.",
   },
   {
-    title: "Practice Layer",
-    desc: "Crucible trials and emotional intelligence training loops built on top of the archive. Record → reflect → recognize → grow. The system turns memory into a structured, repeatable practice — not a passive journal.",
+    title: "Companion",
+    desc: "ech0 reflects. Never diagnoses. Mirror, not oracle. Runtime guardrails screen every generated response for overclaiming before it reaches the user. The mirror that guesses is a liar.",
   },
 ];
 
@@ -89,7 +89,7 @@ const Services = () => {
           <motion.div
             className="box"
             key={layer.title}
-            whileHover={{ background: "lightgray", color: "black" }}
+            whileHover={{ borderColor: "rgba(255,231,122,0.4)", scale: 1.01 }}
           >
             <h2>{layer.title}</h2>
             <p>{layer.desc}</p>
