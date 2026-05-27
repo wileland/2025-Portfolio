@@ -75,7 +75,7 @@ const Hero = () => {
         initial="initial"
         animate="animate"
       >
-        Private-first AI memory · GraphQL · MongoDB Atlas · Voice pipeline · Receipt-grounded reflection
+        Echo Doj0 · Voice Archive · Receipt-Grounded RAG · Mirror not Oracle · Not Louder. Just Truer.
       </motion.div>
 
       <div className="imageContainer">
